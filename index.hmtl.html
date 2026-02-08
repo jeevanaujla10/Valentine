@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Important Question 💘</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff4d8d, #7c5cff);
+      color:white;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .box{
+      background: rgba(255,255,255,0.12);
+      padding:30px;
+      border-radius:20px;
+      width:min(600px,90%);
+      text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    h1{
+      font-size:38px;
+      margin-bottom:10px;
+    }
+
+    p{
+      color:#f2f2f2;
+      font-size:18px;
+    }
+
+    .message{
+      margin:20px 0;
+      padding:15px;
+      border-radius:15px;
+      background: rgba(0,0,0,0.25);
+      font-size:18px;
+      min-height:55px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .buttons{
+      position:relative;
+      height:70px;
+      margin-top:20px;
+    }
+
+    button{
+      font-size:18px;
+      font-weight:bold;
+      border:none;
+      border-radius:15px;
+      padding:14px 22px;
+      cursor:pointer;
+      transition:0.15s;
+    }
+
+    #yesBtn{
+      background:#38d98b;
+      color:#062012;
+    }
+
+    #noBtn{
+      background:#ffb703;
+      color:#2a1a00;
+      position:absolute;
+      left:160px;
+      top:0;
+    }
+
+    .success{
+      margin-top:25px;
+      padding:18px;
+      border-radius:15px;
+      background: rgba(56,217,139,0.25);
+      display:none;
+    }
+
+    .success.show{
+      display:block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h1>Hi Diya 💘</h1>
+    <p>This is a very serious romantic question from Jeevan.</p>
+
+    <h2>Will you be my Valentine? 🌹</h2>
+
+    <div class="message" id="msg">
+      Awaiting your answer… choose wisely 😌
+    </div>
+
+    <div class="buttons">
+      <button id="yesBtn">YES 💖</button>
+      <button id="noBtn">no</button>
+    </div>
+
+    <div class="success" id="success">
+      <h2>YAAAAAY 😭💖</h2>
+      <p>Correct answer Diya. Date night confirmed.</p>
+      <p>Love, Jeevan 🫶</p>
+    </div>
+  </div>
+
+<script>
+  const msgEl = document.getElementById("msg");
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const success = document.getElementById("success");
+
+  let noCount = 0;
+
+  const noMessages = [
+    "Diya… why would you press no 😭",
+    "Try again please 😌",
+    "That button is fake btw.",
+    "Jeevan is now sad in HD 🎥😭",
+    "Ok stop bullying the website 💀",
+    "No button is entering dodge mode 🏃‍♂️💨",
+    "Enough. Your answer is YES now ✅"
+  ];
+
+  function moveNoButton(){
+    const maxX = 300;
+    const maxY = 40;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  noBtn.addEventListener("click", () => {
+    noCount++;
+
+    msgEl.innerHTML = noMessages[Math.min(noCount-1, noMessages.length-1)];
+
+    if(noCount >= 5){
+      moveNoButton();
+    }
+
+    if(noCount >= 7){
+      acceptYes();
+    }
+  });
+
+  yesBtn.addEventListener("click", () => {
+    acceptYes();
+  });
+
+  function acceptYes(){
+    msgEl.innerHTML = "Diya has selected YES 💖 (as she should)";
+    success.classList.add("show");
+    yesBtn.disabled = true;
+    noBtn.disabled = true;
+    noBtn.style.opacity = 0.5;
+  }
+</script>
+
+</body>
+</html>
